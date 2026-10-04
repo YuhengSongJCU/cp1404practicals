@@ -2,8 +2,11 @@ def main():
     filename = input("Enter filename: ")
 
     while filename != "":
-        number_of_lines = count_lines(filename)
-        print(f"{filename} has {number_of_lines} lines.")
+        try:
+            number_of_lines = count_lines(filename)
+            print(f"{filename} has {number_of_lines} lines.")
+        except FileNotFoundError:
+            print(f"ERROR: {filename} does not exist.")
         filename = input("Enter filename: ")
 
 
