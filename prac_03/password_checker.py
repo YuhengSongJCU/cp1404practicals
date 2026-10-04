@@ -37,6 +37,9 @@ def is_valid_password(password):
     for character in password:
        if character.islower():
            number_of_lower += 1
+       elif character.isupper():
+           number_of_upper += 1
+
 
     # TODO: if any of the 'normal' counts are zero, return False
 
