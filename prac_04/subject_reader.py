@@ -8,24 +8,29 @@ FILENAME = "subject_data.txt"
 
 def main():
     """Program to load and display subject data from file."""
-    data = load_data(FILENAME)
-    print(data)
+    subjects = load_subjects(FILENAME)
+    display_subjects(subjects)
 
 
-def load_data(filename=FILENAME):
-    """Read data from file formatted like: subject,lecturer,number of students."""
-    input_file = open(filename)
-    for line in input_file:
-        print(line)  # See what a line looks like
-        print(repr(line))  # See what a line really looks like
-        line = line.strip()  # Remove the \n
-        parts = line.split(',')  # Separate the data into its parts
-        print(parts)  # See what the parts look like (notice the integer is a string)
-        # Make the number an integer as part of a new, poorly named, list
-        data = [parts[0], parts[1], int(parts[2])]
-        print(data)  # See if that worked
-        print("----------")
-    input_file.close()
+def load_subjects(filename):
+    """Read subject data from a file."""
+    subjects = []
+
+    with open(filename) as input_file:
+        for line in input_file:
+            parts = line.strip().split(",")
+            subject = [parts[0], parts[1], int(parts[2])]
+            subjects.append(subject)
+
+    return subjects
+
+
+def display_subjects(subjects):
+    """Display details for each subject."""
+    for subject in subjects:
+        code, lecturer, students = subject
+        print(f"{code} is taught by {lecturer:12} "
+              f"and has {students:3} students")
 
 
 main()
