@@ -25,5 +25,14 @@ def main():
     for champion, count in champion_to_count.items():
         print(f"{champion}: {count}")
 
+    countries = set()
+
+    for record in records:
+        countries.add(record[1])
+
+    print()
+    print(f"These {len(countries)} countries have won Wimbledon:")
+    print(", ".join(sorted(countries)))
+
 
 main()
