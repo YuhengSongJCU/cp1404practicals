@@ -11,9 +11,6 @@ def extract_name(email):
     name = " ".join(name_parts).title()
     return name
 
-# email = input("Email: ")
-# print(extract_name(email))
-
 email_to_name = {}
 
 email = input("Email: ")
