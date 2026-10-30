@@ -7,11 +7,14 @@ import csv
 
 FILENAME = "wimbledon.csv"
 
-def main():
-    with open(FILENAME, "r", encoding="utf-8-sig") as in_file:
+def read_wimbledon_data(filename):
+    with open(filename, "r", encoding="utf-8-sig") as in_file:
         reader = csv.reader(in_file)
         next(reader)
-        records = list(reader)
+        return list(reader)
+
+def main():
+    records = read_wimbledon_data(FILENAME)
 
     champion_to_count = {}
 
