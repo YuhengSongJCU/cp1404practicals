@@ -13,9 +13,7 @@ def read_wimbledon_data(filename):
         next(reader)
         return list(reader)
 
-def main():
-    records = read_wimbledon_data(FILENAME)
-
+def count_champion_wins(records):
     champion_to_count = {}
 
     for record in records:
@@ -24,6 +22,13 @@ def main():
             champion_to_count[champion] += 1
         else:
             champion_to_count[champion] = 1
+
+    return champion_to_count
+
+def main():
+    records = read_wimbledon_data(FILENAME)
+
+    champion_to_count = count_champion_wins(records)
 
     for champion, count in champion_to_count.items():
         print(f"{champion}: {count}")
