@@ -11,5 +11,22 @@ def extract_name(email):
     name = " ".join(name_parts).title()
     return name
 
+# email = input("Email: ")
+# print(extract_name(email))
+
+email_to_name = {}
+
 email = input("Email: ")
-print(extract_name(email))
+while email != "":
+    name = extract_name(email)
+    confirmation = input(f"Is your name {name}? (Y/N) ")
+
+    if confirmation != "" and confirmation.upper() != "Y":
+        name = input("Name: ")
+
+    email_to_name[email] = name
+    email = input("Email: ")
+
+print()
+for email, name in email_to_name.items():
+    print(f"{name} ({email})")
