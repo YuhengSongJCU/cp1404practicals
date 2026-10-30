@@ -1,6 +1,6 @@
 """Wimbledon champion statistics.
 Estimate: 30 minutes
-Actual:
+Actual: 45 minutes
 """
 
 import csv
@@ -25,6 +25,14 @@ def count_champion_wins(records):
 
     return champion_to_count
 
+def get_countries(records):
+    countries = set()
+
+    for record in records:
+        countries.add(record[1])
+
+    return countries
+
 def main():
     records = read_wimbledon_data(FILENAME)
 
@@ -33,10 +41,7 @@ def main():
     for champion, count in champion_to_count.items():
         print(f"{champion}: {count}")
 
-    countries = set()
-
-    for record in records:
-        countries.add(record[1])
+    countries = get_countries(records)
 
     print()
     print(f"These {len(countries)} countries have won Wimbledon:")
