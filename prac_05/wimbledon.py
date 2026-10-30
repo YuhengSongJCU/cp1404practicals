@@ -13,7 +13,17 @@ def main():
         next(reader)
         records = list(reader)
 
-    print(records[:3])
+    champion_to_count = {}
+
+    for record in records:
+        champion = record[2]
+        if champion in champion_to_count:
+            champion_to_count[champion] += 1
+        else:
+            champion_to_count[champion] = 1
+
+    for champion, count in champion_to_count.items():
+        print(f"{champion}: {count}")
 
 
 main()
