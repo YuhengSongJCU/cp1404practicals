@@ -46,6 +46,17 @@ def display_projects(projects):
     for project in completed_projects:
         print(f"  {project}")
 
+def save_projects(projects, filename):
+    """Save projects to a file."""
+    with open(filename, "w") as out_file:
+        print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage",
+              file=out_file)
+
+        for project in projects:
+            print(f"{project.name}\t{project.start_date}\t"
+                  f"{project.priority}\t{project.cost_estimate}\t"
+                  f"{project.completion_percentage}", file=out_file)
+
 def main():
     """Manage projects."""
     print("Welcome to Pythonic Project Management")
@@ -58,6 +69,10 @@ def main():
     while choice != "Q":
         if choice == "D":
             display_projects(projects)
+        elif choice == "S":
+            filename = input("Filename: ")
+            save_projects(projects, filename)
+            print(f"Saved {len(projects)} projects to {filename}")
         else:
             print("This option is not implemented yet.")
 
