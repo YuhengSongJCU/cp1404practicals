@@ -1,4 +1,5 @@
 from project import Project
+import datetime
 
 FILENAME = "projects.txt"
 MENU = """- (L)Load projects
@@ -18,9 +19,9 @@ def load_projects(filename):
         next(in_file)
         for line in in_file:
             parts = line.strip().split("\t")
-            project = Project(parts[0], parts[1], int(parts[2]),
-                              float(parts[3]), int(parts[4]))
-            projects.append(project)
+            start_date = datetime.datetime.strptime(parts[1], "%d/%m/%Y").date()
+            project = Project(parts[0], start_date, int(parts[2]),float(parts[3]), int(parts[4]))
+        projects.append(project)
 
     return projects
 
@@ -61,7 +62,8 @@ def add_project(projects):
     """Get a new project from the user."""
     print("Let's add a new project")
     name = input("Name: ")
-    start_date = input("Start date (dd/mm/yyyy): ")
+    date_string = input("Start date (dd/mm/yyyy): ")
+    start_date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
     priority = int(input("Priority: "))
     cost_estimate = float(input("Cost estimate: $"))
     completion_percentage = int(input("Percent complete: "))
@@ -86,6 +88,27 @@ def update_project(projects):
     new_priority = input("New Priority: ")
     if new_priority != "":
         project.priority = int(new_priority)
+
+def get_start_date(project):
+    """Return the start date of a project."""
+    return project.start_date
+
+def filter_projects(projects):
+    """Display projects starting on or after a given date."""
+    date_string = input("Show projects that start after date (dd/mm/yy): ")
+    start_date = datetime.datetime.strptime(
+        date_string, "%d/%m/%Y").date()
+
+    filtered_projects = []
+
+    for project in projects:
+        if project.start_date >= start_date:
+            filtered_projects.append(project)
+
+    filtered_projects.sort(key=get_start_date)
+
+    for project in filtered_projects:
+        print(project)
 
 def main():
     """Manage projects."""
@@ -115,6 +138,9 @@ def main():
 
         elif choice == "U":
             update_project(projects)
+
+        elif choice == "F":
+            filter_projects(projects)
 
         else:
             print("This option is not implemented yet.")
