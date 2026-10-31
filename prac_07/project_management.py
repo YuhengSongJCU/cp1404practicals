@@ -21,7 +21,7 @@ def load_projects(filename):
             parts = line.strip().split("\t")
             start_date = datetime.datetime.strptime(parts[1], "%d/%m/%Y").date()
             project = Project(parts[0], start_date, int(parts[2]),float(parts[3]), int(parts[4]))
-        projects.append(project)
+            projects.append(project)
 
     return projects
 
@@ -148,7 +148,13 @@ def main():
         print(MENU)
         choice = input(">>> ").upper()
 
-    print("Thank you for using Pythonic Project Management.")
+    save_choice = input(f"Would you like to save to {FILENAME}? (y/n): ").lower()
+
+    if save_choice == "y" or save_choice == "yes":
+        save_projects(projects, FILENAME)
+        print(f"Saved {len(projects)} projects to {FILENAME}")
+
+    print("Thank you for using custom-built project management software.")
 
 
 main()
