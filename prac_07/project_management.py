@@ -70,6 +70,23 @@ def add_project(projects):
                       cost_estimate, completion_percentage)
     projects.append(project)
 
+def update_project(projects):
+    """Update the completion percentage and priority of a project."""
+    for index, project in enumerate(projects):
+        print(f"{index} {project}")
+
+    project_choice = int(input("Project choice: "))
+    project = projects[project_choice]
+    print(project)
+
+    new_percentage = input("New Percentage: ")
+    if new_percentage != "":
+        project.completion_percentage = int(new_percentage)
+
+    new_priority = input("New Priority: ")
+    if new_priority != "":
+        project.priority = int(new_priority)
+
 def main():
     """Manage projects."""
     print("Welcome to Pythonic Project Management")
@@ -95,6 +112,9 @@ def main():
 
         elif choice == "A":
             add_project(projects)
+
+        elif choice == "U":
+            update_project(projects)
 
         else:
             print("This option is not implemented yet.")
