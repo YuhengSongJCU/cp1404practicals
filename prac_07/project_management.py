@@ -67,12 +67,19 @@ def main():
     choice = input(">>> ").upper()
 
     while choice != "Q":
-        if choice == "D":
-            display_projects(projects)
+        if choice == "L":
+            filename = input("Filename: ")
+            projects = load_projects(filename)
+            print(f"Loaded {len(projects)} projects from {filename}")
+
         elif choice == "S":
             filename = input("Filename: ")
             save_projects(projects, filename)
             print(f"Saved {len(projects)} projects to {filename}")
+
+        elif choice == "D":
+            display_projects(projects)
+
         else:
             print("This option is not implemented yet.")
 
