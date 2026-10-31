@@ -57,6 +57,19 @@ def save_projects(projects, filename):
                   f"{project.priority}\t{project.cost_estimate}\t"
                   f"{project.completion_percentage}", file=out_file)
 
+def add_project(projects):
+    """Get a new project from the user."""
+    print("Let's add a new project")
+    name = input("Name: ")
+    start_date = input("Start date (dd/mm/yyyy): ")
+    priority = int(input("Priority: "))
+    cost_estimate = float(input("Cost estimate: $"))
+    completion_percentage = int(input("Percent complete: "))
+
+    project = Project(name, start_date, priority,
+                      cost_estimate, completion_percentage)
+    projects.append(project)
+
 def main():
     """Manage projects."""
     print("Welcome to Pythonic Project Management")
@@ -79,6 +92,9 @@ def main():
 
         elif choice == "D":
             display_projects(projects)
+
+        elif choice == "A":
+            add_project(projects)
 
         else:
             print("This option is not implemented yet.")
